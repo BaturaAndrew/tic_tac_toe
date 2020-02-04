@@ -1,20 +1,21 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-module.exports = {
-  entry: "./src/index.js",
 
-  mode: "development",
+module.exports = {
+  entry: './src/index.js',
+
+  mode: 'development',
   output: {
-    filename: "./main.js"
+    filename: './main.js',
   },
 
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
     watchContentBase: true,
-    progress: true
+    progress: true,
   },
 
   devtool: 'source-map',
@@ -24,7 +25,7 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html',
     }),
-    new MiniCssExtractPlugin(), 
+    new MiniCssExtractPlugin(),
   ],
 
   module: {
@@ -33,8 +34,8 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.json$/,
@@ -67,6 +68,6 @@ module.exports = {
           },
         ],
       },
-    ]
-  }
+    ],
+  },
 };
