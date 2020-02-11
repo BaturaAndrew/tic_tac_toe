@@ -1,0 +1,36 @@
+.square {
+  background: rgb(228, 232, 255);
+  border-right: 1px solid grey;
+  border-bottom: 1px solid grey;
+  float: left;
+  font-size: 3em;
+  font-weight: bold;
+  line-height: 34px;
+  height: 54px;
+  padding: 0;
+  text-align: center;
+  width: 54px;
+  color: blue;
+  opacity: 0.8;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    border-left: 2px solid grey;
+    border-top: 2px solid grey;
+    border-right: 0px solid #bbb;
+    border-bottom: 0px solid #bbb;
+    opacity: 1;
+  }
+}
+
+.active {
+  border-left: 2px solid #bbb;
+  border-top: 2px solid #bbb;
+  border-right: 0px solid #bbb;
+  border-bottom: 0px solid #bbb;
+  background: #bbb;
+  pointer-events: none;
+}
