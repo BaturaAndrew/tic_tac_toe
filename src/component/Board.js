@@ -12,6 +12,7 @@ const activeStyle = {
   background: '#bbb',
   pointerEvents: 'none'
 };
+
 class Board extends React.Component {
   constructor(props) {
     super(props);
@@ -21,8 +22,11 @@ class Board extends React.Component {
     const lastSquare = this.props.lastSquare;
     const active = (i === lastSquare) ? 'active' : '';
     const winner = this.props.winner;
-    let style = null;
     let winnerPosition = [];
+    let style = null;
+    if (active) {
+      style = activeStyle;
+    }
 
     if (winner >= 0 && winner !== false) {
       winnerPosition = this.props.winnerPosition;
@@ -32,7 +36,6 @@ class Board extends React.Component {
     return <Square
       key={i}
       value={this.props.squares[i]}
-      active={active}
       onClick={() => this.props.onClick(i)}
       style={style}
     />;
