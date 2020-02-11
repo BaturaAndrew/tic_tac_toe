@@ -19,7 +19,7 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    const coord = this.position(i);
+    const coord = this.position(i); 
     if (calculateWinner(squares) || squares[i]) return;
     const xIsNext = this.state.xIsNext;
     squares[i] = xIsNext ? 'X' : 'O';
@@ -30,6 +30,7 @@ class Game extends React.Component {
       }]),
       xIsNext: !xIsNext,
       stepNumber: history.length,
+      lastSquare: i,
     })
   }
 
@@ -37,16 +38,17 @@ class Game extends React.Component {
     this.setState({
       stepNumber: step,
       xIsNext: (step % 2) === 0,
+      lastSquare: null
     })
   }
 
   position(i) {
     const dimention = 3;
-    let diff = (i + 1) - dimention * 2;
+    const diff = (i + 1) - dimention * 2;
     if (diff > 0) {
       return { x: diff, y: 3 }
     } else {
-      if (diff <= 0 && diff > -3) {
+      if (diff > -3 && diff <= 0) {
         return { x: diff + 3, y: 2 }
       }
       else {
@@ -58,42 +60,52 @@ class Game extends React.Component {
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const winnerPosition = calculateWinner(current.squares);
+    const winner = (winnerPosition !== null) ? winnerPosition[0] : false;
 
     let status;
-    if (winner) status = 'Winner ' + winner;
-    else status = ' Next player ' + (this.state.xIsNext ? 'X' : 'Y');
+    let player = this.state.xIsNext ? 'X' : 'Y';
+    if (winner !== false) {
+      status = 'Winner ';
+      player = current.squares[winner];
+    }
+    else status = ' Next player ';
 
     const moves = history.map((step, move) => {
       const desc = move ?
         'Go to step #' + move :
         'Go to start of game';
       return (
-        <li className='flex' key={move}>
+        <li className='flex-row' key={move}>
           <button className='step-status' onClick={() => this.jumpTo(move)}>
             {desc}
           </button>
-          <p className='coord'>{`position  X: ${step.coord.x} Y:${step.coord.y}`}</p>
+          <p className='coord'>{`position  X: ${step.coord.x} Y: ${step.coord.y}`}</p>
         </li>
       )
     })
 
     return (
-      <div className="game">
-        <div className="game-conteiner">
-          <div className="game-board">
-            <Board
-              squares={current.squares}
-              onClick={(i) => this.handleSquareClick(i)}
-            />
-          </div>
-          <div className="game-info">
-            <div>{status}</div>
-            <ol className="step">{moves}</ol>
+      <div className="game flex-row">
+        <div className="game-conteiner flex-column">
+          <div className="status">{status}<span>{player}</span></div>
+          <div className="game-block flex-row">
+            <div className="game-board">
+              <Board
+                squares={current.squares}
+                lastSquare={this.state.lastSquare}
+                winner={winner}
+                winnerPosition={winnerPosition}
+                onClick={(i) => this.handleSquareClick(i)}
+              />
+            </div>
+            <div className="game-info">
+              <ol className="step">{moves}</ol>
+            </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -113,7 +125,7 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return lines[i];
     }
   }
   return null;

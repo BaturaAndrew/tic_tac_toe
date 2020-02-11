@@ -4,8 +4,9 @@ import './square.scss';
 function Square(props) {
   return (
     <button
-      className="square"
+      className={`square ${props.active}`}
       onClick={props.onClick}
+      style = {props.style}
     >
       {props.value}
     </button>

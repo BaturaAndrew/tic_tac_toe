@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
+
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
@@ -9,14 +12,20 @@ body {
   display: table;
 }
 
-.flex {
+.flex-row {
   display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
-.status {
-  margin-bottom: 10px;
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
-
 
 .kbd-navigation .square:focus {
   background: #ddd;
@@ -28,31 +37,70 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
   overflow: auto;
+  background-image: linear-gradient(to right, rgba(255, 0, 0, 0), rgb(218, 235, 250));
 }
 
 .game-conteiner {
-  display: flex;
-  height: 300px;
+  justify-content: flex-start;
+  height: 425px;
+  border: 1px solid grey;
+  padding: 15px;
+  background: linear-gradient(#bbb, transparent 1px),
+    linear-gradient(90deg, #bbb, transparent 1px);
+  background-size: 15px 15px;
+  background-position: center center;
+
+  .status {
+    margin-bottom: 10px;
+    font-family: 'Amatic SC', cursive;
+    font-size: 4em;
+    font-weight: 400;
+    color: blue;
+
+    span {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: red;
+    }
+
+  }
 }
 
-.game-info {
-  margin-left: 20px;
+.game-block {
+  align-items: flex-start;
 
-  .step {
-    padding-left: 0px;
-    &-status {
-      width: 140px;
-      margin-bottom: 3px;
+  .game-info {
+    margin-left: 20px;
+    font-family: 'Indie Flower', cursive;
+    font-weight: bold;
+    color: blue;
+    font-size: 1.1em;
+
+    ol {
+      margin: 0;
     }
-  }
 
-  .coord {
-    margin: 0;
-    margin-left: 10px;
+    .step {
+      padding-left: 0px;
+
+      &-status {
+        width: 160px;
+        margin-bottom: 3px;
+        font-family: 'Indie Flower',
+          cursive;
+        font-weight: bold;
+        font-size: 1.1em;
+        color: beige;
+        background: blue;
+        opacity: 0.5;
+        border: 2px solid transparent;
+      }
+    }
+
+    .coord {
+      margin: 0;
+      margin-left: 10px;
+    }
   }
 }

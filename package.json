@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --mode development --watch --open",
     "start": "webpack-dev-server --inline --progress",
+    "build": "webpack --mode production",
     "eslint": "eslint  --fix src/"
   },
   "author": "Batura Andrei",
