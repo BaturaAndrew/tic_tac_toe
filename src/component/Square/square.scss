@@ -11,17 +11,18 @@
   text-align: center;
   width: 54px;
   color: blue;
-
+  opacity: 0.8;
 
   &:focus {
     outline: none;
   }
-  
+
   &:hover {
     border-left: 2px solid grey;
     border-top: 2px solid grey;
     border-right: 0px solid #bbb;
     border-bottom: 0px solid #bbb;
+    opacity: 1;
   }
 }
 

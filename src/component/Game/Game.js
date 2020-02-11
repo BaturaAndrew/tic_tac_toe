@@ -1,5 +1,6 @@
 import React from "react";
-import Board from "./Board";
+import Board from "../Board";
+import './game.scss';
 
 class Game extends React.Component {
 
@@ -19,7 +20,7 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-    const coord = this.position(i); 
+    const coord = this.position(i);
     if (calculateWinner(squares) || squares[i]) return;
     const xIsNext = this.state.xIsNext;
     squares[i] = xIsNext ? 'X' : 'O';
@@ -57,6 +58,23 @@ class Game extends React.Component {
     }
   }
 
+  steps() {
+    const history = this.state.history;
+    const steps = history.map((step, move) => {
+      const desc = move ?
+        'Go to step #' + move :
+        'Go to start of game';
+      return (
+        <li className='flex-row' key={move}>
+          <button className='step-status' onClick={() => this.jumpTo(move)}>
+            {desc}
+          </button>
+          <p className='coord'>{`position  X: ${step.coord.x} Y: ${step.coord.y}`}</p>
+        </li>
+      )
+    })
+    return steps;
+  }
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -70,20 +88,6 @@ class Game extends React.Component {
       player = current.squares[winner];
     }
     else status = ' Next player ';
-
-    const moves = history.map((step, move) => {
-      const desc = move ?
-        'Go to step #' + move :
-        'Go to start of game';
-      return (
-        <li className='flex-row' key={move}>
-          <button className='step-status' onClick={() => this.jumpTo(move)}>
-            {desc}
-          </button>
-          <p className='coord'>{`position  X: ${step.coord.x} Y: ${step.coord.y}`}</p>
-        </li>
-      )
-    })
 
     return (
       <div className="game flex-row">
@@ -100,7 +104,7 @@ class Game extends React.Component {
               />
             </div>
             <div className="game-info">
-              <ol className="step">{moves}</ol>
+              <ol className="step">{this.steps()}</ol>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './square.scss';
+import PropTypes from 'prop-types'
 
 function Square(props) {
   return (
@@ -13,3 +14,14 @@ function Square(props) {
   );
 }
 export default Square;
+
+Square.defaultProps = {
+  value: '',
+  style: {}
+}
+
+Square.propTypes = {
+  value: PropTypes.string,
+  style: PropTypes.object,
+  onClick: PropTypes.func
+}

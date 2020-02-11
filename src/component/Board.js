@@ -1,5 +1,6 @@
 import React from 'react';
 import Square from './Square/Square';
+import PropTypes from 'prop-types';
 
 const winnerStyle = {
   color: 'red'
@@ -63,4 +64,27 @@ class Board extends React.Component {
     );
   }
 }
+
 export default Board;
+
+
+Board.defaultProps = {
+  lastSquare: null,
+  winner: false,
+  winnerPosition: null,
+  squares: null
+}
+
+Board.propTypes = {
+  lastSquare: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number
+  ]),
+  winner: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.number
+  ]),
+  winnerPosition: PropTypes.array,
+  squares: PropTypes.array,
+  onClick: PropTypes.func
+}
