@@ -1,2 +1,2 @@
 # tic tac toe
-https://upbeat-booth-c51839.netlify.com/
+https://objective-spence-a9c165.netlify.com/
