@@ -1,2 +1,3 @@
 # tic tac toe
-https://objective-spence-a9c165.netlify.com/
+link to auto deployed app
+https://peaceful-sammet-a142f9.netlify.com
