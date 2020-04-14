@@ -1,5 +1,10 @@
 .game {
   width: 100%;
+
+  @media screen and (orientation: landscape) {
+    height: 120%;
+  }
+
   height: 100%;
 
   @media screen and (max-width:800px) and (orientation: landscape) {
